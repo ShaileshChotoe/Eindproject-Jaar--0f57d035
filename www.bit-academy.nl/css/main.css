@@ -530,8 +530,8 @@ li, .btn, .tag, .input {
   @media screen and (min-width: 768px) {
     .container,
     .container-fluid {
-      padding-left: 15px;
-      padding-right: 15px; } }
+      padding-left: 0px;
+      padding-right: 0px; } }
 
 .header {
   padding: 2.5rem 0;
