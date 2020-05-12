@@ -134,6 +134,7 @@ $leveldata = $db->connect()->getLevelData($level);
                                 </div>
                                 <p>
                                     <input id="btn" type="submit" class="btn px-md-0 w-md-100" value="check it">
+                                    <a href="level2.html" rel="nofollow" class="btn px-md-0 w-md-100"><span>volgende-></span></a>
                                 </p>
                             </form>
                         </div>
