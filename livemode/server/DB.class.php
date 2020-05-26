@@ -26,6 +26,13 @@ class DB
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+    function insertNewLevelData($leveldata, $level)
+    { 
+        $sql = "UPDATE levels SET template = ? WHERE id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$leveldata, $level]);
+    }
+
 
     // function getUser($username, $password)
     // {

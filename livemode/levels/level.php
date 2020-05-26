@@ -3,9 +3,42 @@ include '../server/DB.class.php';
 
 $level = $_GET['level'];
 
+$locked;
+
+if(isset($_GET['unlocked']))
+{
+    $unlocked = $_GET['unlocked'];   
+    $buttonDisplay = 'none';
+
+    if($unlocked == 'false')
+    {
+        $locked = true;
+        $buttonDisplay =  'none';
+    }
+    else {
+        $locked = false;
+        $buttonDisplay = 'block';
+    }
+    }
+else {
+    $locked = true;
+    $buttonDisplay = 'none';
+}
+
 $db = new DB('localhost', 'bitgame', 'root', '');
 
 $leveldata = $db->connect()->getLevelData($level);
+
+if(!isset($_GET['unlocked']))
+{
+
+    $template = $leveldata[0]->template;
+    
+    $myfile = fopen("../demo/demo1.html", "w") or die("Unable to open file!");
+    fwrite($myfile, $template);
+    fclose($myfile);
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -15,6 +48,7 @@ $leveldata = $db->connect()->getLevelData($level);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#000563">
+    <meta http-equiv="refresh" content="600">
 
     <title>Bit Academy | Prototyping tech innovators</title>
 
@@ -118,6 +152,48 @@ $leveldata = $db->connect()->getLevelData($level);
                 <section class="programme">
                     <div class="row mb-5 pb-5">
                         <div class="col-12 col-md-10 col-lg-9 col-xl-8" style="max-width:50%">
+                        <div style="display:flex;justify-content:space-between;">
+                                <div style="background-color: <?php if($level >= 1){echo "#52b686;";}else{echo "#ea505c;";} ?> text-align: center; border-radius: 10px; border: 2px solid black; width: 50px;
+                                height: 50px; padding-top:1.8%;">
+                                    1
+                                </div>
+                                <div style="background-color: <?php if($level >= 2){echo "#52b686;";}else{echo "#ea505c;";} ?> text-align: center; border-radius: 10px; border: 2px solid black; width: 50px;
+                                height: 50px; padding-top:1.8%;">
+                                    2
+                                </div>
+                                <div style="background-color: <?php if($level >= 3){echo "#52b686;";}else{echo "#ea505c;";} ?> text-align: center; border-radius: 10px; border: 2px solid black; width: 50px;
+                                height: 50px; padding-top:1.8%;">
+                                    3
+                                </div>
+                                <div style="background-color: <?php if($level >= 4){echo "#52b686;";}else{echo "#ea505c;";} ?> text-align: center; border-radius: 10px; border: 2px solid black; width: 50px;
+                                height: 50px; padding-top:1.8%;">
+                                    4
+                                </div>
+                                <div style="background-color: <?php if($level >= 5){echo "#52b686;";}else{echo "#ea505c;";} ?> text-align: center; border-radius: 10px; border: 2px solid black; width: 50px;
+                                height: 50px; padding-top:1.8%;">
+                                    5
+                                </div>
+                                <div style="background-color: <?php if($level >= 6){echo "#52b686;";}else{echo "#ea505c;";} ?> text-align: center; border-radius: 10px; border: 2px solid black; width: 50px;
+                                height: 50px; padding-top:1.8%;">
+                                    6
+                                </div>
+                                <div style="background-color: <?php if($level >= 7){echo "#52b686;";}else{echo "#ea505c;";} ?> text-align: center; border-radius: 10px; border: 2px solid black; width: 50px;
+                                height: 50px; padding-top:1.8%;">
+                                    7
+                                </div>
+                                <div style="background-color: <?php if($level >= 8){echo "#52b686;";}else{echo "#ea505c;";} ?> text-align: center; border-radius: 10px; border: 2px solid black; width: 50px;
+                                height: 50px; padding-top:1.8%;">
+                                    8
+                                </div>
+                                <div style="background-color: <?php if($level >= 9){echo "#52b686;";}else{echo "#ea505c;";} ?> text-align: center; border-radius: 10px; border: 2px solid black; width: 50px;
+                                height: 50px; padding-top:1.8%;">
+                                    9
+                                </div>
+                                <div style="background-color: <?php if($level >= 10){echo "#52b686;";}else{echo "#ea505c;";} ?> text-align: center; border-radius: 10px; border: 2px solid black; width: 50px;
+                                height: 50px; padding-top:1.8%;">
+                                    10
+                                </div>
+                            </div>
                             <h2 class="mb-5 mb-md-4 u-hyphens"><?php echo $leveldata[0]->titel;?></h2>
                             <p>
                                 <?php echo $leveldata[0]->opdracht; ?>
@@ -134,12 +210,12 @@ $leveldata = $db->connect()->getLevelData($level);
                                 </div>
                                 <p>
                                     <input id="btn" type="submit" class="btn px-md-0 w-md-100" value="check it">
-                                    <a href="level.php?level=<?php echo $level + 1;?>" rel="nofollow" class="btn px-md-0 w-md-100"><span>volgende-></span></a>
+                                    <a style="display: <?php echo $buttonDisplay;?>" href="level.php?level=<?php echo $level + 1;?>" rel="nofollow" class="btn px-md-0 w-md-100"><span>volgende</span></a>
                                 </p>
                             </form>
                         </div>
                         <div>
-                            <iframe src="../demo/demo1.html" frameborder="1" height="550px" width="630" class="deiframe"
+                            <iframe id="iframe" src="../demo/demo1.html" frameborder="1" height="550px" width="630" class="deiframe"
                                 style=" border-radius:1rem;"></iframe>
                         </div>
                     </div>
@@ -174,10 +250,9 @@ $leveldata = $db->connect()->getLevelData($level);
             </div>
         </div>
     </footer>
-
     <script src="../js/jquery-2.2.4.min.js"></script>
     <script src="../js/app.js"></script>
-
+    <script src="../js/script.js"></script>
 </body>
 
 </html>
