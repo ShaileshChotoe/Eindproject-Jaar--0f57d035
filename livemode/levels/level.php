@@ -25,6 +25,20 @@ else {
     $buttonDisplay = 'none';
 }
 
+$messDisplay;
+
+if($buttonDisplay == 'none')
+{
+    $messDisplay = 'block';
+}else {
+    $messDisplay = 'none';
+}
+
+if(!isset($_GET['unlocked']))
+{
+    $messDisplay = 'none';
+}
+
 $db = new DB('localhost', 'bitgame', 'root', '');
 
 $leveldata = $db->connect()->getLevelData($level);
@@ -202,6 +216,8 @@ if(!isset($_GET['unlocked']))
                             <code><?php echo $leveldata[0]->code?></code>
                             <br>
                             <br>
+                            <div style="display: <?php echo $messDisplay;?>; fontWeight: bold; font-size: 1.3em; color: white; background:#ff3333;">Je hebt een typfout of mist een element</div>
+                            <br style="display: <?php echo $messDisplay;?>;">
                             <form action="../server/makefile.php" method="post">
                             <input type="hidden" name='level' value=<?php echo $level?>>
                                 <div>

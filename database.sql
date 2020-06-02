@@ -25,15 +25,15 @@ insert into levels
     (titel, opdracht, template, htmluser, requirments, code)
 values
     ('LEVEL1: h1',
-        'De inhoud van een HTML bestand wordt omschreven in elementen.
-                                Ieder element bestaat uit een openend en sluitend stuk tekst,
+        ' De inhoud van een HTML bestand wordt omschreven in elementen. 
+                                Ieder element bestaat uit een openend en sluitend stuk tekst, 
                                 de zogenoemde "opening tag" en "closing tag".
-                                Daar tussen staat de inhoud van het element.
+                                Daar tussen staat de inhoud van het element. 
                                 <br>
-                                Het h1 element staat voor "heading 1".
+                                Het h1 element staat voor "heading 1". 
                                 Dit maakt de tekst groot en goed leesbaar als aanhef of titel van een pagina.
                                 <br>
-                                Voeg een h1 element toe aan de pagina met daarin de text "Flex Academy Course".',
+                                Voeg een h1 element toe aan de pagina met daarin je naam.',
         '<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,16 +49,19 @@ values
 
 
 
-    ('LEVEL2: P', 'Het p element staat voor "paragraph". in een paragraph geef jee een stukje tekst mee die op de pagina wordt geplaatst
-
-
-Nu kunnen we ook een paragraaf toevoegen met daarin de text "Ik leer HTML", door middel van het elemet:
-<p>', '', '', 'p', '&#x3C;p&#x3E;'),
+    ('LEVEL2: P', 'Het p element staat voor "paragraph". 
+                                in een paragraph geef je een stukje tekst mee die op de pagina wordt geplaatst. 
+                                <br>
+                                Nu kunnen we ook een paragraaf toevoegen met daarin een korte introductie over jezelf.
+                                ', '', '', 'p', '&#x3C;p&#x3E;&#x3C;/p&#x3E;'),
 
 
     ('LEVEL3: img', 'Afbeeldingen in HTML toevoegen gaat door middel van het IMG element. 
                                 Een IMG element heeft een "src" attribuut waar een link naar een afbeelding kan worden meegegeven(bijv. door de link van een foto op google). 
-                                Deze afbeelding wordt dan weergegeven als inhoud van dit element. De website willen we mooier maken dus, voeg een mooi plaatje toe aan de hand van het element: ', '', '', 'img', '&#x3C;img src=&#x22;&#x22;&#x3E;'),
+                                Deze afbeelding wordt dan weergegeven als inhoud van dit element.
+                                <br>
+                                De website willen we mooier maken dus, voeg een mooi plaatje toe aan de hand van het element: 
+                                <br>', '', '', 'img', '&#x3C;img src=&#x22;&#x22;&#x3E;'),
 
 
     ('LEVEL4: a', 'Als je gebruikers door wilt sturen op je website kan je gebruik maken van links. Voeg een link to aan je website naar een van je social media. Het anchor element maakt van de inhoud van het element een link. Deze link verwijst naar de locatie aangegeven met het "href" attribuut. Het anchor element ziet er zo uit:', '', '', 'a', '&#x3C;a href=&#x22;&#x22;&#x3E;&#x3C;/a&#x3E;'),

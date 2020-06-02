@@ -58,7 +58,7 @@ function getAttributes($element)
 function level1() {
     global $dom;
     $element = $dom->getElementsByTagName('h1')->item(0);
-    if($element->nodeValue == 'Flex Academy Course')
+    if($element->nodeValue != '')
     {
         return true;
     }
@@ -68,7 +68,7 @@ function level1() {
 function level2() {
     global $dom;
     $element = $dom->getElementsByTagName('p')->item(0);
-    if($element->nodeValue == 'Ik leer HTML')
+    if($element->nodeValue != '')
     {
         return true;
     }
@@ -102,5 +102,50 @@ function level3()
         }
     }
     return false;
+}
+
+function level4()
+{
+    global $dom;
+    $element = $dom->getElementsByTagName('a')->item(0);
+    $attr = getAttributes($element);
+    foreach($attr as $atr)
+    {
+        if($atr->name == 'href' && $atr->nodeValue != '')
+        {
+            if($atr->value != ''){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+function level5()
+{
+    global $dom;
+    $element = $dom->getElementsByTagName('ul');
+    foreach ($element as $el) {
+        if($el->parentNode->tagName == 'li') {
+            if ($el->nodeValue != 'test') {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+function level6()
+{
+    global $dom;
+    $element = $dom->getElementsByTagName('input');
+    $attr1 = getAttributes($element[0]);
+    $attr2 = getAttributes($element[1]);
+    if (($attr1[0]->name != 'type') && ($attr1[0]->value != 'text'))
+    {
+        return false;
+    }
+    if (($attr2[0]->name != 'type') && ($attr2[0]->value != 'submit')){return false;}
+    return true;
 }
 ?>
