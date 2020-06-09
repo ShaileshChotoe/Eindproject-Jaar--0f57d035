@@ -1,9 +1,28 @@
 <?php 
+
+
 include '../server/DB.class.php';
 
 $level = $_GET['level'];
 
 $locked;
+
+//einde
+if ($level == 11)
+{
+    $zipArchive = new ZipArchive();
+ 
+    $zipFilePath = '../demo.zip';
+    
+    $status = $zipArchive->open($zipFilePath,  ZipArchive::CREATE);
+     
+    $zipArchive->addFile('../demo/demo1.html', 'index.html');
+    $zipArchive->addFile('../demo/css/style.css', 'style.css');
+    $zipArchive->addFile('../demo/script.js', 'script.js');
+    $zipArchive->close();
+header("Location: ../levels/einde.html");
+return;
+}
 
 if(isset($_GET['unlocked']))
 {

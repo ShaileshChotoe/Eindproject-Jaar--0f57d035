@@ -2,6 +2,7 @@
 include '../server/DB.class.php';
 
 $level = $_POST['level'];
+
 $user_input = $_POST['html'];
 
 $db = new DB('localhost', 'bitgame', 'root', '');
@@ -10,6 +11,18 @@ $levelData = $db->connect()->getLevelData($level);
 
 $template = $levelData[0]->template;
 
+//CSS
+if ($level >= 7)
+{
+$css_temp = $levelData[0]->htmluser;
+
+$cssfile = fopen("../demo/style.css", "w") or die("Unable to open file!");
+$new = str_replace(".end{}", $user_input . ".end{}", $css_temp);
+fwrite($cssfile, $new);
+fclose($cssfile);
+}
+
+
 // //check styff
 $html = $user_input;
 $dom = new DOMDocument;
@@ -17,16 +30,31 @@ $dom->loadHTML($html);
 
 $functionName = "level" . $level;
 
-$myfile = fopen("../demo/demo1.html", "w") or die("Unable to open file!");
-$template = str_replace("</body>", $user_input . "</body>", $template);
-fwrite($myfile, $template);
-fclose($myfile);
+if($level <= 6)
+{
+    $myfile = fopen("../demo/demo1.html", "w") or die("Unable to open file!");
+    $template = str_replace("</body>", $user_input . "<br>". "</body>", $template);
+    fwrite($myfile, $template);
+    fclose($myfile);
+}
+else
+{
+    $myfile = fopen("../demo/demo1.html", "w") or die("Unable to open file!");
+    $template = str_replace("</body>", '' . "<br>". "</body>", $template);
+    fwrite($myfile, $template);
+    fclose($myfile);
+}
+
 
 if ($functionName())
 {
     //insert
     // $db->connect()->insertGoodLevelData($level);
     $db->connect()->insertNewLevelData($template, $level+1);
+    if ($level >= 7)
+    {
+    $db->connect()->insertCss($new, $level+1);
+    }
 header("Location: ../levels/level.php?level=$level&unlocked=true");
 }
 else{
@@ -109,12 +137,15 @@ function level4()
     global $dom;
     $element = $dom->getElementsByTagName('a')->item(0);
     $attr = getAttributes($element);
-    foreach($attr as $atr)
+    if($element->nodeValue != '')
     {
-        if($atr->name == 'href' && $atr->nodeValue != '')
+        foreach($attr as $atr)
         {
-            if($atr->value != ''){
-                return true;
+            if($atr->name == 'href')
+            {
+                if($atr->value != ''){
+                    return true;
+                }
             }
         }
     }
@@ -146,6 +177,25 @@ function level6()
         return false;
     }
     if (($attr2[0]->name != 'type') && ($attr2[0]->value != 'submit')){return false;}
+    return true;
+}
+
+function level7()
+{
+    return true;
+}
+
+function level8()
+{
+    return true;
+}
+
+function level9()
+{
+    return true;
+}
+function level10()
+{
     return true;
 }
 ?>

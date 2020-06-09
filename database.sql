@@ -39,9 +39,10 @@ values
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script.js"></script>
     <title>Document</title>
 </head>
-<body style="background: white;">
+<body>
     
 </body>
 </html>', '', 'h1', '&#x3C;h1&#x3E;TEST&#x3C;/h1&#x3E;'),
@@ -82,7 +83,12 @@ values
                                 Je eigen webpagina bevat nu informatie. 
                                 Maar behalve de verschillende headings is er nog niet veel met de opmaak van de webpagina gedaan. 
                                 Je gaat nu je webpagina styling met behulp van CSS.<br>
-                                Hier gaan we het eerder geplaatste h1 element een kleur geven. Op de plek van blue kan je ook een andere kleur zetten of je kan een kleucode gebruiken bijvoorbeeld #22FFE9.', '', '', 'color', 'h1{
+                                Hier gaan we het eerder geplaatste h1 element een kleur geven. Op de plek van blue kan je ook een andere kleur zetten of je kan een kleucode gebruiken bijvoorbeeld #22FFE9.', '', 'body 
+{
+    background: white;
+}
+
+.end{}', 'color', 'h1{
                                     <br>
                                         color: blue;
                                     <br>

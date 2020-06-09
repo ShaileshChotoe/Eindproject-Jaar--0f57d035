@@ -33,6 +33,13 @@ class DB
         $stmt->execute([$leveldata, $level]);
     }
 
+    function insertCss($leveldata, $level)
+    { 
+        $sql = "UPDATE levels SET htmluser = ? WHERE id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$leveldata, $level]);
+    }
+
 
     // function getUser($username, $password)
     // {
