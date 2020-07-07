@@ -40,44 +40,6 @@ class DB
         $stmt->execute([$leveldata, $level]);
     }
 
-
-    // function getUser($username, $password)
-    // {
-    //     $sql = "SELECT * FROM users WHERE username = ? and password = ?";
-    //     $stmt = $this->pdo->prepare($sql);
-    //     $stmt->execute([$username, $password]);
-
-    //     return $stmt->fetch(PDO::FETCH_OBJ);
-    // }
-
-    // function insertPost($code, $userId, $lang, $private, $link)
-    // {
-    //     $sql = "INSERT INTO posts (code, userId, language, private, link) 
-    //     VALUES (?,?,?,?,?)";
-    //     $stmt = $this->pdo->prepare($sql);
-    //     $stmt->execute([$code, $userId, $lang, $private, $link]);
-    // }
-
-    // function getLastIdPost() 
-    // {
-    //     $sql = "SELECT @last_id := MAX(id) FROM posts;
-
-    //     SELECT * FROM table WHERE id = @last_id;";
-    //     $stmt = $this->pdo->prepare($sql);
-    //     $stmt->execute();
-        
-    //     return $stmt->fetch();
-    // }
-
-    // function getPost($id)
-    // {
-    //     $sql = "SELECT * FROM posts where id = ?";
-    //     $stmt = $this->pdo->prepare($sql);
-    //     $stmt->execute([$id]);
-
-    //     return $stmt->fetch(PDO::FETCH_OBJ);
-    // }
-
 }
 
 

@@ -1,17 +1,26 @@
+<?php
+
+session_start();
+
+$_path = $_SESSION['session_number'] . ".css";
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="script.js"></script>
+    <link rel="stylesheet" href="<?php echo $_path; ?>">
     <title>Document</title>
 </head>
 <body>
     
-<h1>TEST</h1><br><p>hoi</p><br><img src="https://store-images.s-microsoft.com/image/apps.4405.13510798882802239.f465054d-2a80-4b40-97a1-8a944b3a7b1b.10d60edd-e506-461b-a088-9c308c801be1?mode=scale&q=90&h=300&w=300"><br><a href="www.google.com">LINK</a><br><li>
+<h1>TEST</h1><br><p>ds</p><br><img src="https://media-exp1.licdn.com/dms/image/C4E0BAQHoml1yCdoBcg/company-logo_200_200/0?e=2159024400&v=beta&t=tO6UZXGC7IfzU17DK046wI0ukGbULMy-OFCPB7Eh9ms"><br><a href="De link">Mijn website</a><br><li>
 <ul>d</ul>
 <ul>f</ul>
 <ul>d</ul>
 </li><br><input type="text">
-<input type="submit"><br><br><br><br><br></body>
+<input type="submit"><br><br><br><br></body>
 </html>

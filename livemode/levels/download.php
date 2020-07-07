@@ -1,3 +1,22 @@
+<?php
+
+session_start();
+
+$display = 'none';
+
+if(isset($_GET['sent']))
+{
+    $display = 'block';
+    unlink("../userfiles/" . $_SESSION['session_number'] . ".php");
+    unlink("../userfiles/" . $_SESSION['session_number'] . ".css");
+}
+else
+{
+    $display = 'none';
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="nl">
 
@@ -121,13 +140,14 @@
                                 <input id="btn" type="submit" class="btn px-md-0 w-md-100"
                                     value="Verzend naar mijn mail">
                             </p>
+                            <h4 style="display: <?php echo $display;?>">Email is verzonden, check ook in je spam folder.</h4>
                             </form>
                             <br><br>
                             <p>
                                 gemaakt door: George Wahba, Stijn van der Made, Shai Chotoe en Imad Kajdouh
                             </p>
                             <p>
-                                sponsor:Klaas Schoenmaker
+                               
                             </p>
                         </div>
                     </div>

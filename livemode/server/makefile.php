@@ -1,22 +1,27 @@
 <?php
+
+session_start();
+
 include '../server/DB.class.php';
 
 $level = $_POST['level'];
 
 $user_input = $_POST['html'];
 
-$db = new DB('localhost', 'bitgame', 'root', '');
+//$db = new DB('localhost', 'bitgame', 'root', '');
+$db = new DB('localhost', 'bit-enrollment', 'bit-enrollment', 'mBjyKfc_U-67TV2vnxxg_9!Ye@fK8!');
 
 $levelData = $db->connect()->getLevelData($level);
 
-$template = $levelData[0]->template;
+$path = "../userfiles/" . $_SESSION['session_number'] . ".php";
+$template = file_get_contents($path);
 
 //CSS
 if ($level >= 7)
 {
 $css_temp = $levelData[0]->htmluser;
 
-$cssfile = fopen("../demo/style.css", "w") or die("Unable to open file!");
+$cssfile = fopen("../userfiles/" . $_SESSION['session_number'] . ".css", "w") or die("Unable to open file!");
 $new = str_replace(".end{}", $user_input . ".end{}", $css_temp);
 fwrite($cssfile, $new);
 fclose($cssfile);
@@ -30,16 +35,18 @@ $dom->loadHTML($html);
 
 $functionName = "level" . $level;
 
+
 if($level <= 6)
 {
-    $myfile = fopen("../demo/demo1.html", "w") or die("Unable to open file!");
-    $template = str_replace("</body>", $user_input . "<br>". "</body>", $template);
+    $myfile = fopen("../userfiles/" . $_SESSION['session_number'] . ".php", "w") or die("Unable to open file!");
+    $content = $_SESSION['levels'][$level - 1]['standard'];
+    $template = str_replace("</body>", $user_input . "<br>". "</body>", $content);
     fwrite($myfile, $template);
     fclose($myfile);
 }
 else
 {
-    $myfile = fopen("../demo/demo1.html", "w") or die("Unable to open file!");
+    $myfile = fopen("../userfiles/" . $_SESSION['session_number'] . ".php", "w") or die("Unable to open file!");
     $template = str_replace("</body>", '' . "<br>". "</body>", $template);
     fwrite($myfile, $template);
     fclose($myfile);
@@ -55,6 +62,18 @@ if ($functionName())
     {
     $db->connect()->insertCss($new, $level+1);
     }
+
+    //zet goede level
+
+    //$_SESSION['levels'][$level - 1]['standard'] = $template;
+    $overgebrachte = file_get_contents("../userfiles/" . $_SESSION['session_number'] . ".php");
+
+$nieuw = array(
+    'standard' => $overgebrachte
+);
+
+array_push($_SESSION['levels'], $nieuw);
+
 header("Location: ../levels/level.php?level=$level&unlocked=true");
 }
 else{
@@ -73,6 +92,15 @@ header("Location: ../levels/level.php?level=$level&unlocked=false");
 
 //     return $innerHTML;
 // }
+
+function replaceBetween($target, $from, $to, $with){
+    if(strpos($target, $from)===false)return false;
+    $regex = "'".$from."(.*?)".$to."'si";
+    preg_match_all($regex, $target, $match);
+    $match = $match[1];
+    foreach($match as $m) $target = str_replace($from.$m.$to, $with, $target);
+    return $target;
+  }
 
 function getAttributes($element)
 {

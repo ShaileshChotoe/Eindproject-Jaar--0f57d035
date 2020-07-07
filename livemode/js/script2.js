@@ -1,0 +1,1 @@
+document.getElementById('iframe').contentWindow.location.reload();

@@ -1,24 +1,41 @@
 <?php 
 
+session_start();
 
 include '../server/DB.class.php';
 
 $level = $_GET['level'];
+$iframepath = "../userfiles/" . $_SESSION['session_number'] . ".php";
+
+//echo $iframepath;
 
 $locked;
 
 //einde
 if ($level == 11)
 {
+
+
+
+    $cssfile = $_SESSION['session_number'] . '.css';
+
+    //vervang css link
+    $myfile = fopen("../userfiles/" . $_SESSION['session_number'] . ".php", "w") or die("Unable to open file!");
+    $content = $_SESSION['levels'][$level - 1]['standard'];
+    $template = str_replace('href="<?php echo $_path; ?>"', "href='$cssfile'", $content);
+    fwrite($myfile, $template);
+    fclose($myfile);
+
+
     $zipArchive = new ZipArchive();
  
     $zipFilePath = '../demo.zip';
     
     $status = $zipArchive->open($zipFilePath,  ZipArchive::CREATE);
      
-    $zipArchive->addFile('../demo/demo1.html', 'index.html');
-    $zipArchive->addFile('../demo/css/style.css', 'style.css');
-    $zipArchive->addFile('../demo/script.js', 'script.js');
+    $zipArchive->addFile("../userfiles/" . $_SESSION['session_number'] . ".php", 'index.php');
+    $zipArchive->addFile("../userfiles/" . $_SESSION['session_number'] . ".css", $_SESSION['session_number'] . ".css");
+    $zipArchive->addFile('../userfiles/script.js', 'script.js');
     $zipArchive->close();
 header("Location: ../levels/einde.html");
 return;
@@ -58,7 +75,8 @@ if(!isset($_GET['unlocked']))
     $messDisplay = 'none';
 }
 
-$db = new DB('localhost', 'bitgame', 'root', '');
+$db = new DB('localhost', 'bit-enrollment', 'bit-enrollment', 'mBjyKfc_U-67TV2vnxxg_9!Ye@fK8!');
+//$db = new DB('localhost', 'bitgame', 'root', '');
 
 $leveldata = $db->connect()->getLevelData($level);
 
@@ -227,6 +245,7 @@ if(!isset($_GET['unlocked']))
                                     10
                                 </div>
                             </div>
+                            <br>
                             <h2 class="mb-5 mb-md-4 u-hyphens"><?php echo $leveldata[0]->titel;?></h2>
                             <p>
                                 <?php echo $leveldata[0]->opdracht; ?>
@@ -250,8 +269,9 @@ if(!isset($_GET['unlocked']))
                             </form>
                         </div>
                         <div>
-                            <iframe id="iframe" src="../demo/demo1.html" frameborder="1" height="550px" width="630" class="deiframe"
+                            <iframe id="iframe" src="<?php echo $iframepath;?>"frameborder="1" height="550px" width="630" class="deiframe"
                                 style=" border-radius:1rem;"></iframe>
+                                <input id="session_number" type="hidden" value="<?php echo $_SESSION['session_number']?>">
                         </div>
                     </div>
                 </section>
@@ -287,7 +307,8 @@ if(!isset($_GET['unlocked']))
     </footer>
     <script src="../js/jquery-2.2.4.min.js"></script>
     <script src="../js/app.js"></script>
-    <script src="../js/script.js"></script>
+    <script src="../js/script.js?v=19.0"></script>
+    <script src="../js/script2.js?v=13.92"></script>
 </body>
 
 </html>
